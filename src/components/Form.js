@@ -1,30 +1,30 @@
-
-   
 import React, { useState } from "react";
 
 function Form() {
   const [firstName, setFirstName] = useState("Django");
   const [lastName, setLastName] = useState("Starr");
-  const [submittedData, setSubmittedData] = useState([])
+  const [submittedData, setSubmittedData] = useState([]);
   const [errors, setErrors] = useState([])
 
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
+  function handleFirstNameChange(event) {
+    setFirstName(event.target.value);
   }
 
-  function handleLastNameChange(e) {
-    setLastName(e.target.value);
+  function handleLastNameChange(event) {
+    setLastName(event.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    if  (firstName.length > 0) {
-      const formData = { firstName: firstName, lastName: lastName };
-      const dataArray = [...submittedData, formData];
-      setSubmittedData(dataArray);
-      setFirstName("");
-      setLastName("");
-      setErrors([]);
+    if (firstName.length > 0) {
+    const formData = {
+      firstName: firstName,
+      lastName: lastName
+    };
+    const dataArray = [...submittedData, formData];
+    setSubmittedData(dataArray);
+    setFirstName("");
+    setLastName("");
     } else {
       setErrors(["First name is required!"]);
     }
@@ -36,8 +36,8 @@ function Form() {
         {data.firstName} {data.lastName}
       </div>
     );
-  });
-
+  })
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -46,11 +46,12 @@ function Form() {
         <button type="submit">Submit</button>
       </form>
       {errors.length > 0
-      ? errors.map((error, index) => (
-        <p> key={index} style={{ color: "red" }}
-        </p>
-      ))
-    : null}
+        ? errors.map((error, index) => (
+          <p key={index} style={{ color: "red" }}>
+            {error}
+          </p>
+        ))
+      : null}
       <h3>Submissions</h3>
       {listOfSubmissions}
     </div>
